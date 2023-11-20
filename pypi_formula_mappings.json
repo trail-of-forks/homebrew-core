@@ -847,6 +847,12 @@
       "certifi", "cffi", "keyring", "packaging", "pycparser", "six", "virtualenv"
     ]
   },
+  "polyfile": {
+    "exclude_packages": [
+      "cffi", "cryptography", "jinja2", "markupsafe", "pillow", "pycparser",
+      "pyyaml", "six", "typing-extensions"
+    ]
+  },
   "pre-commit": {
     "exclude_packages": ["PyYAML", "virtualenv"]
   },
