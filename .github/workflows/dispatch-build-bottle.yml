@@ -79,7 +79,9 @@ jobs:
     container: ${{matrix.container}}
     timeout-minutes: ${{fromJson(github.event.inputs.timeout)}}
     permissions:
-      contents: read
+      id-token: write
+      contents: write
+      packages: write
     defaults:
       run:
         shell: /bin/bash -e {0}
@@ -114,6 +116,11 @@ jobs:
             --skip-online-checks \
             --skip-dependents \
             '${{inputs.formula}}'
+      
+      - name: generate build provenance
+        uses: github-early-access/generate-build-provenance@main
+        with:
+          subject_path: "${{ inputs.formula }}"
 
       - name: Post-build steps
         if: always()
