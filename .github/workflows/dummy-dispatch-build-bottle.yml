@@ -1,8 +1,12 @@
-name: Dispatch build bottle (for chosen OS versions)
+name: Dummy Dispatch build bottle (for chosen OS versions)
 
 run-name: Build bottle of ${{ inputs.formula }} on ${{ inputs.runner }}
 
 on:
+  push:
+    branches:
+      - "joesweeney/gh-attestation"
+  
   workflow_dispatch:
     inputs:
       runner:
