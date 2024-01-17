@@ -169,7 +169,7 @@ jobs:
             --skip-online-checks \
             --skip-dependents \
             '${{inputs.formula}}'
-          echo "tarball_name=$(pwd)/$(ls *.tar.gz | head -n 1)" >> "$GITHUB_ENV"
+          # echo "tarball_name=$(pwd)/$(ls *.tar.gz | head -n 1)" >> "$GITHUB_ENV"
 
       # - name: commands
       #   id: run_extra_commands
@@ -177,7 +177,15 @@ jobs:
       #   run: |
       #     echo "tarball_name=$(ls *.tar.gz | head -n 1)" >> "$GITHUB_ENV"
 
-      - name: generate build provenance
-        uses: github-early-access/generate-build-provenance@main
+      # - name: generate build provenance
+      #   uses: github-early-access/generate-build-provenance@main
+      #   with:
+      #     subject-path: '${{ env.tarball_name }}'
+      - name: Post-build steps
+        if: always()
+        uses: trail-of-forks/homebrew-actions/post-build@joesweeney/build-provenance
         with:
-          subject-path: '${{ env.tarball_name }}'
+          runner: ${{ matrix.runner }}
+          cleanup: ${{ matrix.cleanup }}
+          bottles-directory: ${{ env.BOTTLES_DIR }}
+          logs-directory: ${{ env.BOTTLES_DIR }}/logs
