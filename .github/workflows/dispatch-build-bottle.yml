@@ -117,14 +117,9 @@ jobs:
             --skip-dependents \
             '${{inputs.formula}}'
       
-      - name: generate build provenance
-        uses: github-early-access/generate-build-provenance@main
-        with:
-          subject_path: "${{ inputs.formula }}"
-
       - name: Post-build steps
         if: always()
-        uses: Homebrew/actions/post-build@master
+        uses: trail-of-forks/homebrew-actions/post-build@joesweeney/build-provenance
         with:
           runner: ${{ matrix.runner }}
           cleanup: ${{ matrix.cleanup }}
