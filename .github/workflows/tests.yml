@@ -153,6 +153,10 @@ jobs:
         run: brew determine-test-runners "$TESTING_FORMULAE" "$DELETED_FORMULAE"
 
   tests:
+    permissions:
+      id-token: write
+      contents: write
+      packages: write
     needs: [tap_syntax, setup_tests, setup_runners]
     if: >
       github.event_name == 'pull_request' &&

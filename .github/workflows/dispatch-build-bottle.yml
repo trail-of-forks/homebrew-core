@@ -79,7 +79,9 @@ jobs:
     container: ${{matrix.container}}
     timeout-minutes: ${{fromJson(github.event.inputs.timeout)}}
     permissions:
-      contents: read
+      id-token: write
+      contents: write
+      packages: write
     defaults:
       run:
         shell: /bin/bash -e {0}
