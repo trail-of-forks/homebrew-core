@@ -246,7 +246,6 @@ jobs:
     permissions:
       id-token: write # for `generate build provenance`
       contents: write # for `generate build provenance`
-      packages: write # for `generate build provenance`
       actions: read # for `brew pr-pull`
       pull-requests: write # for `gh pr edit|review`
       repository-projects: write # for `gh pr edit`
